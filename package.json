@@ -17,7 +17,10 @@
     "build": "run-p build:api build:web",
     "build:api": "cd api && npm run build",
     "build:web": "cd web && npm run build",
-    "run-all": "npm build & npm install & npm start"
+    "test": "run-p test:api test:web",
+    "test:api": "cd api && npm run test",
+    "test:web": "cd web && npm run test",
+    "run-all": "npm build & npm test & npm install & npm start"
   },
   "author": "Filip Mamic",
   "license": "MIT",
