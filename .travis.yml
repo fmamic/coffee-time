@@ -4,7 +4,6 @@ language: node_js
 
 node_js:
   - "9"
-  - "8"
 
 services:
   - docker
@@ -19,7 +18,7 @@ jobs:
         - docker-compose up --build -d
       script: 
         - echo "Running integration test on full stack agains $(node -v) ..."
-        - docker-compose run api npm test
+        - docker-compose -d run api npm run integration-test
 
 notifications:
   email:

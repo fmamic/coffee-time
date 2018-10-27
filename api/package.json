@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "mocha test/routes.js"
+    "integration-test": "mocha test/routes.js --timeout 100 --exit"
   },
   "dependencies": {
     "api-query-params": "^4.8.1",
