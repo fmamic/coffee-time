@@ -7,11 +7,21 @@
     "social",
     "black"
   ],
+  "scripts": {
+    "postinstall": "run-p install:api install:web",
+    "install:api": "cd api && npm install",
+    "install:web": "cd web && npm install",
+    "start": "run-p start:api start:web",
+    "start:api": "npm run start --prefix api",
+    "start:web": "npm run start --prefix web",
+    "build": "run-p build:api build:web",
+    "build:api": "cd api && npm run build",
+    "build:web": "cd web && npm run build",
+    "run-all": "npm build & npm install & npm start"
+  },
   "author": "Filip Mamic",
   "license": "MIT",
-  "devDependencies": {
-    "grunt": "^1.0.3",
-    "grunt-contrib-jshint": "^2.0.0",
-    "nodemon": "^1.18.4"
+  "dependencies": {
+    "npm-run-all": "^4.1.3"
   }
 }
