@@ -1,5 +1,5 @@
 # Use official nodejs image version 8 as a base layer
-FROM node:8
+FROM node
 
 # Create app directory
 WORKDIR /usr/src/app

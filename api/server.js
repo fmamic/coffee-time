@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 // set up express app
 const app = express();
 
-mongoose.connect('mongodb://localhost/coffee-time', { useNewUrlParser: true });
+mongoose.connect('mongodb://mongo:27017/coffee-time', { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.json());

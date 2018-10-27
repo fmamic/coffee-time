@@ -1,0 +1,17 @@
+{
+  "name": "coffee-time",
+  "version": "0.0.1",
+  "description": "Social application for coffee drinkers and enthusiasts",
+  "keywords": [
+    "coffee",
+    "social",
+    "black"
+  ],
+  "author": "Filip Mamic",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-jshint": "^2.0.0",
+    "nodemon": "^1.18.4"
+  }
+}

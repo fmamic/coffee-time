@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  # Database MongoDB for the backend storage
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017
+
+  api:
+    build: ./api
+    image: coffee-time/api
+    links:
+      - mongo
+
+  web:
+    build: ./web
+    image: coffee-time/web
