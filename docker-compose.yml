@@ -1,6 +1,7 @@
 version: "3.3"
 
 services:
+  
   # Database MongoDB for the backend storage
   mongo:
     image: mongo
@@ -8,6 +9,7 @@ services:
     ports:
       - 27017
 
+  # Backend RESTfull service
   api:
     build: ./api
     image: coffee-time/api
@@ -16,7 +18,16 @@ services:
     environment:
       MONGO_PORT: 27017
       MONGO_HOSTNAME: mongo
+    expose:
+      - 4000
+    ports:
+      - 4000:4000
 
+  # Fronted ReactJS
   web:
     build: ./web
     image: coffee-time/web
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
