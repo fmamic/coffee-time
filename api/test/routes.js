@@ -1,5 +1,4 @@
 const request = require('supertest');
-const app = require('../server');
 
 //==================== user API test ====================
 
@@ -8,7 +7,7 @@ const app = require('../server');
  */
 describe('GET /api/users', function () {
     it('respond with json containing a list of all users', function (done) {
-        request(app)
+        request("api:4000")
             .get('/api/users')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
@@ -30,7 +29,7 @@ describe('POST /api/users', function () {
         "password": "dummy"
     }
     it('respond with json containing a list of all users', function (done) {
-        request(app)
+        request("api:4000")
             .post('/api/users')
             .send(data)
             .set('Accept', 'application/json')

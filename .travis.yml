@@ -18,7 +18,7 @@ jobs:
         - docker-compose up --build -d
       script: 
         - echo "Running integration test on full stack agains $(node -v) ..."
-        - docker-compose -d run api npm run integration-test
+        - docker-compose run api npm run integration-test
 
 notifications:
   email:

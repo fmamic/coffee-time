@@ -31,7 +31,7 @@ app.use(function(err, req, res, next) {
 
 // listen for requests
 app.listen(process.env.port || 4000, () => {
-    console.log('Now listening for requests');
+    console.log(`Now listening for requests on port ${process.env.port || 4000}`);
 });
 
 module.exports = app
