@@ -1,4 +1,4 @@
 # coffee-time
 Coffee time social app
 
-https://travis-ci.org/fmamic/coffee-time.svg?branch=master
+[![Build Status](https://travis-ci.org/fmamic/coffee-time.svg?branch=master)](https://travis-ci.org/fmamic/coffee-time)
