@@ -19,10 +19,23 @@ jobs:
       script: 
         - echo "Running integration test on full stack agains $(node -v) ..."
         - docker-compose exec api npm run integration-test
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - cd api
+      - docker build -t coffee-app/api .
+      - docker tag coffee-app/api $DOCKER_USERNAME/coffee-app/api
+      - cd ../web
+      - docker build -t coffee-app/web .
+      - docker tag coffee-app/web $DOCKER_USERNAME/coffee-app/web
+      - cd ../
+      - docker images
+      - docker push $DOCKER_USERNAME/coffee-app/api
+      - docker push $DOCKER_USERNAME/coffee-app/web
 
 deploy:
   - provider: heroku
-    api_key: "7c14838d-cecc-466e-9bd9-364734c41ed6"
+    api_key: "$HEROKU_API_KEY"
     app: coffee-time-app
 
 notifications:
