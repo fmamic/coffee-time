@@ -1,6 +1,9 @@
 {
   "name": "coffee-time",
   "version": "0.0.1",
+  "engines": {
+    "node": "8.12.0"
+  },
   "description": "Social application for coffee drinkers and enthusiasts",
   "keywords": [
     "coffee",
