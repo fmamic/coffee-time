@@ -3,5 +3,4 @@ api/node_modules
 node_modules
 .vscode
 data
-package-lock*
 .env

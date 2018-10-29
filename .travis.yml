@@ -20,6 +20,11 @@ jobs:
         - echo "Running integration test on full stack agains $(node -v) ..."
         - docker-compose exec api npm run integration-test
 
+deploy:
+  - provider: heroku
+    api_key: "7c14838d-cecc-466e-9bd9-364734c41ed6"
+    app: coffee-time-app
+
 notifications:
   email:
     recipients:
