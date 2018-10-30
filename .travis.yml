@@ -23,15 +23,15 @@ jobs:
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - cd api
-      - docker build -t coffee-app/api .
-      - docker tag coffee-app/api $DOCKER_USERNAME/coffee-app/api
+      - docker build -t coffee-app-api .
+      - docker tag coffee-app-api $DOCKER_USERNAME/coffee-app-api
       - cd ../web
-      - docker build -t coffee-app/web .
-      - docker tag coffee-app/web $DOCKER_USERNAME/coffee-app/web
+      - docker build -t coffee-app-web .
+      - docker tag coffee-app-web $DOCKER_USERNAME/coffee-app-web
       - cd ../
       - docker images
-      - docker push $DOCKER_USERNAME/coffee-app/api
-      - docker push $DOCKER_USERNAME/coffee-app/web
+      - docker push $DOCKER_USERNAME/coffee-app-api
+      - docker push $DOCKER_USERNAME/coffee-app-web
 
 deploy:
   - provider: heroku
