@@ -3,12 +3,14 @@ const routes = require('./routes/users');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const jwt = require('./helpers/jwt');
 
 // set up express app
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(jwt());
 
 if (process.env.NODE_ENV !== 'production') {
     dotenv.load();
@@ -20,8 +22,6 @@ const mongoDatabase = "coffee-time";
 
 mongoose.connect(`mongodb://${mongoHostname}:${mongoPort}/${mongoDatabase}`, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
-
-app.use(bodyParser.json());
 
 // initialize routes
 app.use('/api', routes);

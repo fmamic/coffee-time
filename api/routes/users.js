@@ -3,27 +3,28 @@ const express = require('express')
 const router = express.Router();
 const User = require('../models/user')
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // get the list of Users from the database
-router.get('/users', function(req, res, next) {
+router.get('/users', function (req, res, next) {
     const { filter, skip, limit, sort, projection } = aqp(req.query);
     User.find(filter).skip(skip).limit(limit).sort(sort).select(projection).then(function (users) {
-      res.send(users);
+        res.send(users);
     }).catch(next);
 });
 
 // update User
-router.put('/users/:id', function(req, res, next) {
-    User.findOneAndUpdate({_id: req.params.id}, req.body).then(function(user) {
-        User.findOne({_id: req.params.id}).then(function(userUpdate) {
+router.put('/users/:id', function (req, res, next) {
+    User.findOneAndUpdate({ _id: req.params.id }, req.body).then(function (user) {
+        User.findOne({ _id: req.params.id }).then(function (userUpdate) {
             res.send(userUpdate);
         });
     }).catch(next);
 });
 
 // delete User from the database
-router.delete('/users/:id', function(req, res, next) {
-    User.findOneAndRemove({_id: req.params.id}).then(function(user) {
+router.delete('/users/:id', function (req, res, next) {
+    User.findOneAndRemove({ _id: req.params.id }).then(function (user) {
         res.send(user);
     }).catch(next);
 });
@@ -39,25 +40,36 @@ router.post('/users/signup', (req, res, next) => {
 });
 
 router.post('/users/signin', (req, res, next) => {
-    User.findOne({email: req.body.email})
+    User.findOne({ email: req.body.email })
         .then(user => {
-            bcrypt.compare(req.body.password, user.password, function(err, result){
-            if(err) {
+            bcrypt.compare(req.body.password, user.password, function (err, result) {
+                if (err) {
+                    return res.status(401).json({
+                        failed: 'Unauthorized Access'
+                    });
+                }
+                if (result) {
+
+                    const jwtToken = jwt.sign({
+                        email: user.email,
+                        _id: user._id
+                    },
+                        'secret',
+                        {
+                            expiresIn: '2h'
+                        });
+
+                    return res.status(200).json({
+                        success: 'Welcome to the JWT Auth',
+                        token: jwtToken
+                    });
+                }
                 return res.status(401).json({
                     failed: 'Unauthorized Access'
                 });
-            }
-            if(result) {
-                return res.status(200).json({
-                    success: 'Welcome to the JWT Auth'
-                });
-            }
-            return res.status(401).json({
-                failed: 'Unauthorized Access'
             });
-       });
-    })
-    .catch(next);;
- });
+        })
+        .catch(next);;
+});
 
 module.exports = router;
