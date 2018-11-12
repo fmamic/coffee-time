@@ -7,6 +7,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import { withStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types';
 import PasswordInput from './PasswordInput'
+import LoginCard from './LoginCard'
 
 const styles = theme => ({
     form: {
@@ -39,25 +40,26 @@ class Login extends React.Component {
 
         return (
             <div>
-            <FormControl className={ classes.form } margin='normal'>
-                <Input id="username" className={ classes.input }
-                placeholder="Username"
-                    startAdornment={
-                        <InputAdornment position='start'>
-                            <AccountCircle />
-                        </InputAdornment>
-                    }
-                />
-                <PasswordInput 
-                    className={ classes.input } 
-                    name="password"
-                    value={password}
-                    onChange={this.onChange}
-                />
-                <Button variant='contained' color='primary'>
-                    Sign in
-                </Button>
-            </FormControl>
+                <LoginCard></LoginCard>
+                <FormControl className={ classes.form } margin='normal'>
+                    <Input id="username" className={ classes.input }
+                    placeholder="Username"
+                        startAdornment={
+                            <InputAdornment position='start'>
+                                <AccountCircle />
+                            </InputAdornment>
+                        }
+                    />
+                    <PasswordInput 
+                        className={ classes.input } 
+                        name="password"
+                        value={password}
+                        onChange={this.onChange}
+                    />
+                    <Button variant='contained' color='primary'>
+                        Submit
+                    </Button>
+                </FormControl>
             </div>
         );
     }
